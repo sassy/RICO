@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .container
+    .header
+      h1= title
+    .jumbotron
+      video(id='video', width='300', height='300',autoplay)
+    .row.marketing
+      .col-lg-6
+        p
+          button#and_button(onclick="answer()") 着信
+        #message
+
+      .col-lg-6
+        p
+          #peerlist.list-group
