@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
+var browserSync = require('browser-sync');
 
 gulp.task('jshint', function() {
     return gulp.src([
@@ -13,4 +14,16 @@ gulp.task('jshint', function() {
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
-gulp.task('default', ['jshint']);
+gulp.task('watch', function() {
+    browserSync.init({
+        server:{
+            baseDir: "./"
+        },
+        notify: false
+    });
+    gulp.watch(['*.js',
+        'public/javascripts/*.js',
+        'test/*.js'], ['jshint'], browserSync.reload);
+});
+
+gulp.task('default', ['watch']);
