@@ -14,6 +14,12 @@ gulp.task('jshint', function() {
     .pipe($.jshint.reporter('jshint-stylish'));
 });
 
+gulp.task('mocha', function() {
+    return gulp.src(['test/*.js'], {read: false})
+      .pipe($.mocha({reporter : 'spec'}))
+      .on('error', $.util.log);
+});
+
 gulp.task('watch', function() {
     browserSync.init({
         server:{
