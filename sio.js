@@ -16,7 +16,6 @@ module.exports = function(server) {
     });
     promise.then(function(s) {
         var io = require('socket.io').listen(s);
-        var self_id = null;
         io.sockets.on('connection', function(socket) {
             redisClient.hkeys("users", function(err, replies) {
                 replies.forEach(function(reply, i) {
@@ -24,17 +23,16 @@ module.exports = function(server) {
                 });
             });
             socket.on("sendid", function(id) {
-                console.log(id);
-                self_id = id;
-                redisClient.hset("users",  self_id, "open", redis.print);
+                redisClient.hset("users",  id, "open", redis.print);
                 socket.broadcast.emit("recieveid", id);
             });
 
+            socket.on("removeid", function(id) {
+                redisClient.hdel("users", id, redis.print);
+                socket.broadcast.emit("removeid", id);
+            });
+
             socket.on("disconnect", function() {
-                if (self_id != null) {
-                    redisClient.hdel("users", self_id, redis.print);
-                    socket.broadcast.emit("removeid", self_id);
-                }
             });
         });
     }, function(error) {
