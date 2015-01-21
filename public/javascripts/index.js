@@ -10,7 +10,10 @@ peer.on('open', function(id) {
     });
     socket.on('recieveid', function(id) {
         peer_id = id;
-        $("#peerlist").append('<a href="#" class="list-group-item">' + peer_id + '</a>').bind('click', offer);
+        $("#peerlist").append('<a href="#" class="list-group-item" id="' + peer_id + '">' + peer_id + '</a>').bind('click', offer);
+    });
+    socket.on('removeid', function(id) {
+        $("#" + id).remove();
     });
 });
 

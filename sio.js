@@ -33,6 +33,7 @@ module.exports = function(server) {
             socket.on("disconnect", function() {
                 if (self_id != null) {
                     redisClient.hdel("users", self_id, redis.print);
+                    socket.broadcast.emit("removeid", self_id);
                 }
             });
         });
