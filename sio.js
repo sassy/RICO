@@ -2,7 +2,7 @@ var redis = require("redis");
 
 if (process.env.REDISTOGO_URL) { //for Heroku
     var rtg = require("url").parse(process.env.REDISTOGO_URL);
-    var redisClient = redis.createClient(rtg.port, rgt.hostname);
+    var redisClient = redis.createClient(rtg.port, rtg.hostname);
     redisClient.auth(rtg.auth.split(":")[1]);
 } else {
     var redisClient = redis.createClient();
