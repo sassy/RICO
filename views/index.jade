@@ -1,9 +1,14 @@
 extends layout
 
 block content
+  script(type='text/javascript').
+    (function(){
+      rfc('#{api_key}');
+    })();
   .container
     .header
       h1= title
+      #peer_id
     .jumbotron
       video(id='video', width='300', height='300',autoplay)
     .row.marketing
