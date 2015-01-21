@@ -1,5 +1,13 @@
 var redis = require("redis");
-var redisClient = redis.createClient();
+
+if (process.env.REDISTOGO_URL) { //for Heroku
+    var rtg = require("url").parse(process.env.REDISTOGO_URL);
+    var redisClient = redis.createClient(rtg.port, rgt.hostname);
+    redisClient.auth(rtg.auth.split(":")[1]);
+} else {
+    var redisClient = redis.createClient();
+}
+
 var Promise = require("bluebird");
 
 module.exports = function(server) {
