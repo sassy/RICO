@@ -3,9 +3,11 @@ var redisClient = redis.createClient();
 var Promise = require("bluebird");
 
 module.exports = function(server) {
-
     var promise = new Promise(function(resolve, reject) {
         redisClient.hkeys("users", function(err, replies) {
+            if (replies.length === 0) {
+                resolve(server);
+            }
             replies.forEach(function(reply, i) {
                 redisClient.hdel("users", reply, redis.print);
                 resolve(server);
