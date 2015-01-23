@@ -26,6 +26,7 @@
     "gulp-mocha": "^2.0.0",
     "gulp-util": "^3.0.2",
     "jshint-stylish": "^1.0.0",
+    "main-bower-files": "^2.5.0",
     "mocha": "^2.1.0",
     "supertest": "^0.15.0"
   }

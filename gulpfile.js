@@ -3,6 +3,7 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
+var mainBowerFiles = require('main-bower-files');
 
 gulp.task('jshint', function() {
     return gulp.src([
@@ -18,6 +19,11 @@ gulp.task('mocha', function() {
     return gulp.src(['test/*.js'], {read: false})
       .pipe($.mocha({reporter : 'spec'}))
       .on('error', $.util.log);
+});
+
+gulp.task('bower', function() {
+    return gulp.src(mainBowerFiles())
+      .pipe(gulp.dest('./public/libs'));
 });
 
 gulp.task('watch', function() {
