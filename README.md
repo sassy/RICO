@@ -9,6 +9,7 @@ RICO : WebRTC COnference service.
 * [![Code Climate](https://codeclimate.com/github/sassy/RICO/badges/gpa.svg)](https://codeclimate.com/github/sassy/RICO)
 * [![Test Coverage](https://codeclimate.com/github/sassy/RICO/badges/coverage.svg)](https://codeclimate.com/github/sassy/RICO)
 
+
 ## usage
 
 ```
@@ -17,3 +18,5 @@ $ bower install
 $ npm start
 ```
 
+動かすときにはSkyWay(http://nttcom.github.io/skyway/en/)のAPIキーが必要です。
+SKYWAY_API_KEY の環境変数に入れてください。
