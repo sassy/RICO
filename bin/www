@@ -32,8 +32,18 @@ server.on('listening', onListening);
 /**
  * setting socket server.
  */
+var redis = require("redis");
+
+if (process.env.REDISTOGO_URL) { //for Heroku
+    var rtg = require("url").parse(process.env.REDISTOGO_URL);
+    var redisClient = redis.createClient(rtg.port, rtg.hostname);
+    redisClient.auth(rtg.auth.split(":")[1]);
+} else {
+    var redisClient = redis.createClient();
+}
+
 var sio = require('../sio.js');
-sio(server);
+sio(server, redisClient);
 
 /**
  * Event listener for HTTP server "error" event.

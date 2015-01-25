@@ -18,7 +18,10 @@ gulp.task('jshint', function() {
 gulp.task('mocha', function() {
     return gulp.src(['test/*.js'], {read: false})
       .pipe($.mocha({reporter : 'spec'}))
-      .on('error', $.util.log);
+      .on('error', $.util.log)
+      .on('end', function() {
+          process.exit();
+      });
 });
 
 gulp.task('bower', function() {
@@ -39,3 +42,4 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', ['watch']);
+gulp.task('test', ['mocha']);
