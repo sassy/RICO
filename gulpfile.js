@@ -29,6 +29,25 @@ gulp.task('bower', function() {
       .pipe(gulp.dest('./public/libs'));
 });
 
+gulp.task('cover', function() {
+    return gulp.src([
+        '*.js',
+        'public/javascripts/*.js',
+        'test/*.js'
+    ])
+        .pipe($.istanbul())
+        .pipe($.istanbul.hookRequire())
+        .on('end', function() {
+            gulp.src(['test/*.js'])
+                .pipe($.mocha({reporter : 'spec'}))
+                .pipe($.istanbul.writeReports(
+                ))
+                .on('end', function() {
+                    process.exit();
+                });
+        });
+});
+
 gulp.task('watch', function() {
     browserSync.init({
         server:{
