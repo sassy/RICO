@@ -1,0 +1,10 @@
+{
+    "strict" : false,
+    "indent" : 4,
+    "unused" : true,
+    "undef" : true,
+    "globals" : {
+        "require" : false,
+        "process" : false
+    }
+}
